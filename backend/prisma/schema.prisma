@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  balance   Decimal  @db.Decimal(14, 2)
+  createdAt DateTime @default(now())
+
+  sentLogs     AuditLog[] @relation("Sender")
+  receivedLogs AuditLog[] @relation("Receiver")
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  sender     User     @relation("Sender", fields: [senderId], references: [id])
+  senderId   Int
+  receiver   User     @relation("Receiver", fields: [receiverId], references: [id])
+  receiverId Int
+  amount     Decimal  @db.Decimal(14, 2)
+  status     String
+  createdAt  DateTime @default(now())
+}
