@@ -53,7 +53,7 @@ function App() {
 
   const senderBalanceText = useMemo(() => {
     if (!balance) return "—";
-    return `$${Number(balance.balance).toFixed(2)}`;
+    return `₹${Number(balance.balance).toFixed(2)}`;
   }, [balance]);
 
   return (

@@ -52,7 +52,7 @@ function TransactionHistory({ history, sortConfig, onSort }) {
                 <td>{formatDate(log.createdAt)}</td>
                 <td>{log.sender?.name || `#${log.senderId}`}</td>
                 <td>{log.receiver?.name || `#${log.receiverId}`}</td>
-                <td className="amount">${formatAmount(log.amount)}</td>
+                <td className="amount">₹{formatAmount(log.amount)}</td>
                 <td>
                   <span className="pill success">{log.status}</span>
                 </td>
